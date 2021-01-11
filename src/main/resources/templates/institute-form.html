@@ -1,0 +1,59 @@
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Formulario Instituto/Universidad</title>
+        <meta charset="UTF-8">        
+        <link th:href="@{/main.css}" type="text/css" rel="stylesheet" />        
+        <script th:src="@{/jquery-3.4.1.min.js}"></script>        
+        
+    </head>
+    <body>
+
+        <div th:insert="menu"></div>
+
+        <div class="main">
+            <div th:insert="header"></div>
+
+            <form th:action="@{/save-institute}" th:object="${cmd}">
+                <table border="1" width="90%" align="center" cellpadding="5">     
+                    <tr>
+                        <td class="fheading"  colspan="4">Formulario de Instituto/Universidad</td>
+                    </tr>
+                    <tr>
+                        <td>Nombre del Instituto/Universidad</td>
+                        <td>
+                            <input type="text" th:field="*{name}"/>
+                        </td>
+                        <td>Telefono</td>
+                        <td width="50%"><input type="text" th:field="*{contact.phone}"/></td>                       
+                    </tr>
+                    <tr>
+                        <td>Email</td>
+                        <td><input type="text" th:field="*{contact.email}"/></td>
+                        <td>Ciudad</td>
+                        <td><input type="text" th:field="*{contact.permanentAddress.city}" /></td>                       
+                    </tr>
+                    <tr>                       
+                        <td>Pais</td>
+                        <td>
+                            <input type="text" th:field="*{contact.permanentAddress.country}"/>
+                        </td>
+                        <td>CodigoPostal</td>
+                        <td><input type="text" th:field="*{contact.permanentAddress.zip}"/></td>
+                    </tr>
+                    <tr>
+                        <td>Direccion completa</td>
+                        <td colspan="3">
+                            <textarea th:field="*{contact.permanentAddress.detail}" placeholder="Numero de lote/manzana/porton, calle/avenida, ciudad" title="description" cols="60" rows="3"></textarea>
+                        </td>
+                    </tr>               
+                    <tr>                    
+                        <td colspan="4" align="center">
+                            <button >Guardar</button>
+                        </td>                                        
+                    </tr>
+
+                </table>
+            </form>
+        </div>
+    </body>
+</html>

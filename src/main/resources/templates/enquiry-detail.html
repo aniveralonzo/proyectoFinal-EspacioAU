@@ -1,0 +1,109 @@
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title th:text="${dataMap.name +'- Enquiry Detail'}"></title>
+        <meta charset="UTF-8">        
+        <link th:href="@{/main.css}" type="text/css" rel="stylesheet" />
+        <script th:src="@{/jquery-3.4.1.min.js}"></script>     
+        <script>            
+            function openForm(enquiryId) {
+                $("#id_enquiryId").val(enquiryId);
+                $('#followupForm').css("display", "block");
+                $('#followupForm').css('left', event.pageX);
+                $('#followupForm').css('top', event.pageY);
+                $('#followupForm').css('display', 'inline');
+                $("#followupForm").css("position", "absolute");
+            }
+
+            function closeForm() {
+                $('#followupForm').css("display", "none");
+            }
+        </script>
+    </head>
+    <body>
+
+        <div th:insert="menu"></div>
+
+        <div class="main">
+            <div th:insert="header"></div>
+
+            <table border="1" width="90%" align="center" cellpadding="5">     
+                <tr>
+                    <td class="fheading" colspan="3">                             
+                        <div style="float: left;" th:text="${dataMap.name}"></div>                         
+                        <div style="float: right; font-size: 16px;" th:text="${#dates.format(dataMap.doe, 'dd-MMM-yyyy')}"></div>                                                
+                    </td>
+                </tr>
+                <tr>                       
+                    <td>  
+                        Cursos: <span class="txt" th:text="${dataMap.courses}"></span>
+                    </td>
+                    <td>
+                        Tarifa/costo: <span class="txt" th:text="${dataMap.fees}"></span>
+                    </td>                       
+                    <td>
+                        Fuentes de consultas: <span class="txt" th:text="${dataMap.sourceOfEnquiry}"></span>
+                    </td>                       
+                </tr>
+                <tr>                       
+                    <td colspan="3" height="40px">  
+                        Observacion: <span class="txt" th:text="${dataMap.remark}"></span>
+                    </td>
+
+                </tr>
+                <tr>                       
+                    <td>  
+                        Telefono: <span class="txt"  th:text="${dataMap.phone}"></span>
+                    </td>
+                    <td colspan="2">
+                        Email: <span class="txt" th:text="${dataMap.email}"></span>
+                    </td>                      
+                </tr>
+                <tr>       
+                    <td>
+                        Ciudad: <span class="txt" th:text="${dataMap.city}"></span>
+                    </td> 
+                    <td colspan="2">  
+                        Pais: <span class="txt"  th:text="${dataMap.country}"></span>
+                    </td>
+
+                </tr>
+                <tr>      
+                    <td >
+                        Direccion: <span class="txt" th:text="${dataMap.detail}"></span>
+                    </td> 
+                    <td colspan="2">
+                        Codigo Postal <span class="txt" th:text="${dataMap.zip}"></span>
+                    </td>   
+                </tr>
+            </table>
+            <br/>
+            <table border="1" width="90%" align="center" cellpadding="5">     
+                <tr>
+                    <td class="fheading" colspan="3">                             
+                        Seguimiento investigacion   
+                    </td>
+                </tr>
+                <tr>
+                    <th>Fecha </th>
+                    <th align="left">Notas</th>                   
+                </tr>
+                <tr th:each="f: ${followupList}">
+                    <td width="15%" th:text="${#dates.format(f.doe, 'dd-MMM-yyyy')}"> Fecha</td>
+                    <td th:text="${f.detail}">Notas</td>                   
+                </tr>
+               
+               
+            </table>
+            <br/>      
+            <div class="form-popup" id="followupForm">
+            <form  th:action="@{/save-followup?go=eview}" method="post" class="form-container">
+                <input type="hidden" name="enquiryId" id="id_enquiryId"/>
+                <button type="button" class="btnX" onclick="closeForm()">X</button>
+                <h3>Agregar Seguimiento</h3>
+                <textarea name="followup" width="100%" style="width: 100%" rows="5" ></textarea>
+                <button type="submit" class="btn">Guardar</button>
+            </form>
+        </div>
+        </div>
+    </body>
+</html>

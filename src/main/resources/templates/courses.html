@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Cursos</title>
+        <meta charset="UTF-8">        
+        <link th:href="@{/main.css}" type="text/css" rel="stylesheet" />        
+        <script th:src="@{/jquery-3.4.1.min.js}"></script>        
+
+    </head>
+    <body>
+
+        <div th:insert="menu"></div>
+
+        <div class="main">
+            <div th:insert="header"></div>
+
+            <form th:action="@{/save-course}" th:object="${cmd}">
+                <table border="1" width="90%" align="center" cellpadding="5">     
+                    <tr>
+                        <td class="fheading" colspan="4">Curso/Carrera</td>
+                    </tr>
+                    <tr>                       
+                        <td>Seleccione su Instituto/Universidad</td>
+                        <td colspan="3">
+                            <select th:field="*{institute.instituteId}">
+                                <option th:each="i : ${instituteList}" th:value="${i.instituteId}" th:text="${i.name}">
+                                </option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>                       
+                        <td>Nombre de Curso/Carrera</td>
+                        <td>
+                            <input type="text" th:field="*{name}" />
+                            <input type="hidden" th:field="*{courseId}" />
+                        </td>  
+                        <td >Costo del Curso/Carrera</td>
+                        <td>
+                            <input type="text" th:field="*{fees}" />
+                        </td>
+                    </tr>
+                    <tr>                       
+                        <td colspan="4">
+                            <button>Guardar</button>
+                        </td>                 
+                    </tr>
+                </table>
+            </form>
+            <br/>
+           <table border="1" width="90%" align="center" cellpadding="5">                         
+                <tr>                       
+                    <th>ID</th>
+                    <th>CURSO/CARRERA</th>                        
+                    <th>COSTO</th>                        
+                    <th>INSTITUTO/U</th>                        
+                </tr>
+                <tr th:each="c,itr: ${courseList}">                       
+                    <td th:text="${c.courseId}">ID</td>
+                    <td th:text="${c.name}">CURSO/CARRERA</td>                        
+                    <td th:text="${c.fees}">COSTO</td>                        
+                    <td th:text="${c.instituteName}">INSTITUTO/U</td>                        
+
+                </tr>
+            </table>
+        </div>
+    </body>
+</html>

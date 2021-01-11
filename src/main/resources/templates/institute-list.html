@@ -1,0 +1,37 @@
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Lista de Institutos/Universidades</title>
+        <meta charset="UTF-8">        
+        <link th:href="@{/main.css}" type="text/css" rel="stylesheet" />        
+        <script th:src="@{/jquery-3.4.1.min.js}"></script>        
+        
+    </head>
+    <body>
+
+        <div th:insert="menu"></div>
+
+        <div class="main">
+            <div th:insert="header"></div>
+
+            <table  border="1" width="90%" align="center" cellpadding="5">
+            <tr>
+                <td style="font-size: 20px; font-weight: bold" colspan="7">Lista de Institutos/Universidades</td>
+            </tr>
+            <tr>
+                <th>ID</th>
+                <th>NOMBRE</th>
+                <th>TELEFONO</th>
+                <th>EMAIL</th>                
+                <th>CIUDAD</th>                                
+            </tr>    
+            <tr th:each="inst: ${instList}">
+                <td th:text="${inst.instituteId}">ID</td>
+                <td th:text="${inst.name}">NOMBRE</td>
+                <td th:text="${inst.phone}">TELEFONO</td>
+                <td th:text="${inst.email}">EMAIL</td>                
+                <td th:text="${inst.city}">CIUDAD</td>                                
+            </tr> 
+        </table>
+        </div>
+    </body>
+</html>

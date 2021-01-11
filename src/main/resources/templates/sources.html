@@ -1,0 +1,47 @@
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Fuentes de investigaciones</title>
+        <meta charset="UTF-8">        
+        <link th:href="@{/main.css}" type="text/css" rel="stylesheet" />
+        <script th:src="@{/jquery-3.4.1.min.js}"></script>               
+    </head>
+    <body>
+
+        <div th:insert="menu"></div>
+
+        <div class="main">
+            <div th:insert="header"></div>
+
+            <form th:action="@{/save-enquiry-source}" th:object="${cmd}">
+                <table border="1" width="90%" align="center" cellpadding="5">     
+                    <tr>
+                        <td class="fheading" colspan="3">BUSQUEDAS</td>
+                    </tr>
+                    <tr>                       
+                        <td align="right">Ingrese fuente/pagina web                            
+                        </td>
+                        <td>
+                            <input type="text" th:field="*{name}" />
+                            <input type="hidden" th:field="*{enquirySourceId}" />
+                            
+                        </td>    
+                        <td width="40%">
+                            <button >Guardad</button>
+                        </td> 
+                    </tr>
+                </table>
+            </form>
+            <br/>
+            <table border="1" width="90%" align="center" cellpadding="5">                         
+                <tr>                       
+                    <th>ID</th>
+                    <th>FUENTE/BIBLIOGRAFIA</th>                        
+                </tr>
+                <tr th:each="es: ${enquirySourceList}">                       
+                    <td th:text="${es.enquirySourceId}">ID</td>
+                    <td th:text="${es.name}">FUENTE/BIBLIOGRAFIA</td>                        
+                </tr>
+            </table>
+        </div>
+    </body>
+</html>
